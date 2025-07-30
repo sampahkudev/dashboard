@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/dashboard/static/css/main.da04cdb7.css",
+    "main.js": "/dashboard/static/js/main.c3394ac4.js",
+    "static/media/logo-sampahku.png": "/dashboard/static/media/logo-sampahku.e9668d332b4783e39ae1.png",
+    "index.html": "/dashboard/index.html",
+    "main.da04cdb7.css.map": "/dashboard/static/css/main.da04cdb7.css.map",
+    "main.c3394ac4.js.map": "/dashboard/static/js/main.c3394ac4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.da04cdb7.css",
+    "static/js/main.c3394ac4.js"
+  ]
+}
