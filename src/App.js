@@ -7,8 +7,8 @@ import NotifSampah from './view/NotifSampah';
 import TukarPoint from './view/TukarPoint';
 import Donasi from './view/Donasi';
 import Profile from './view/Profile';
-import { fetchSaldo, fetchUserProfile, fetchPoint, fetchLatestSampah, requestCashout } from './utils/apiService';
-import Swal from 'sweetalert2';
+import TarikSaldo from './view/TarikSaldo';
+import { fetchSaldo, fetchUserProfile, fetchPoint, fetchLatestSampah } from './utils/apiService';
 
 function App() {
   const [selectedView, setSelectedView] = useState('home');
@@ -19,52 +19,6 @@ function App() {
   const [nama, setNama] = useState('');
   const [point, setPoint] = useState(0);
   const [latestSampah, setLatestSampah] = useState(null);
-
-
-  const handleTarikSaldo = async () => {
-    try {
-      if (saldo <= 0) {
-        Swal.fire({
-          icon: 'warning',
-          title: 'Saldo tidak mencukupi!',
-          text: 'Silakan setor sampah terlebih dahulu.',
-          confirmButtonColor: '#f59e0b',
-        });
-        return;
-      }
-
-      const result = await Swal.fire({
-        title: 'Konfirmasi Penarikan',
-        text: `Kamu akan menarik saldo sebesar Rp. ${saldo}. Lanjutkan?`,
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Ya, tarik',
-        cancelButtonText: 'Batal',
-        confirmButtonColor: '#16a34a',
-      });
-
-      if (result.isConfirmed) {
-        const kode = await requestCashout(saldo); // 🔥 kirim request ke backend
-        Swal.fire({
-          icon: 'success',
-          title: 'Penarikan Berhasil!',
-          html: `<b>Kode Penarikan:</b><br><code>${kode}</code>`,
-          confirmButtonColor: '#16a34a',
-        });
-
-        // Reset saldo ke 0 setelah penarikan
-        setSaldo(0);
-      }
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Gagal menarik saldo',
-        text: 'Terjadi kesalahan saat memproses penarikan.',
-        confirmButtonColor: '#dc2626',
-      });
-    }
-  };
-
 
   useEffect(() => {
     const loadData = async () => {
@@ -186,7 +140,7 @@ function App() {
                     <p className="text-3xl font-bold text-green-900 mb-1">Rp {saldo?.toLocaleString('id-ID')}</p>
                     <p className="text-sm text-gray-500">Poin Anda: <strong>{point}</strong></p>
                     <button
-                      onClick={handleTarikSaldo}
+                      onClick={() => handleViewChange('TarikSaldo')}
                       className="mt-4 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-full transition duration-200"
                     >
                       Tarik Saldo
@@ -248,6 +202,11 @@ function App() {
             {selectedView === 'Donasi' && (
               <div className="my-4">
                 <Donasi />
+              </div>
+            )}
+            {selectedView === 'TarikSaldo' && (
+              <div className="my-4">
+                <TarikSaldo />
               </div>
             )}
             {selectedView === 'NotifSampah' && (
