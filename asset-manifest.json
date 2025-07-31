@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/dashboard/static/css/main.a9f79c20.css",
-    "main.js": "/dashboard/static/js/main.fb88eab6.js",
+    "main.css": "/dashboard/static/css/main.08ba4bb5.css",
+    "main.js": "/dashboard/static/js/main.43bf05ff.js",
     "static/media/logo-sampahku.png": "/dashboard/static/media/logo-sampahku.e9668d332b4783e39ae1.png",
     "index.html": "/dashboard/index.html",
-    "main.a9f79c20.css.map": "/dashboard/static/css/main.a9f79c20.css.map",
-    "main.fb88eab6.js.map": "/dashboard/static/js/main.fb88eab6.js.map"
+    "main.08ba4bb5.css.map": "/dashboard/static/css/main.08ba4bb5.css.map",
+    "main.43bf05ff.js.map": "/dashboard/static/js/main.43bf05ff.js.map"
   },
   "entrypoints": [
-    "static/css/main.a9f79c20.css",
-    "static/js/main.fb88eab6.js"
+    "static/css/main.08ba4bb5.css",
+    "static/js/main.43bf05ff.js"
   ]
 }
