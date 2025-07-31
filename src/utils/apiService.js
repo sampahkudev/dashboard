@@ -181,3 +181,17 @@ export const fetchUserProfile = async () => {
     throw error;
   }
 };
+
+export const updateUserProfile = async (data) => {
+  try {
+    const token = getToken();
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+    const response = await axios.put(myProfile, data, { headers });
+
+    return response.data; // atau bisa return response.data.message jika ingin ambil pesan saja
+  } catch (error) {
+    console.error('Error updating user profile:', error);
+    throw error;
+  }
+};

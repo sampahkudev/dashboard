@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { FaUser, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaEdit } from 'react-icons/fa';
 import { fetchUserProfile } from '../utils/apiService';
+import EditProfile from './EditProfile';
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const loadProfile = async () => {
-      try {
-        const data = await fetchUserProfile();
-        setUserData(data);
-      } catch (err) {
-        console.error('Gagal mengambil data profil:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
     loadProfile();
   }, []);
 
+  const loadProfile = async () => {
+    try {
+      const data = await fetchUserProfile();
+      setUserData(data);
+    } catch (err) {
+      console.error('Gagal mengambil data profil:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="max-w-md mx-auto my-10 p-6 bg-white rounded-xl shadow-md border">
+    <div className="max-w-md mx-auto my-10 p-6 bg-white rounded-xl shadow-md border relative">
       <h1 className="text-2xl font-bold text-center mb-6">Profil Pengguna</h1>
 
       {loading ? (
@@ -55,13 +58,27 @@ const Profile = () => {
           </div>
 
           <div className="text-center mt-6">
-            <button className="px-4 py-2 bg-green-600 text-white rounded-full hover:bg-green-700 transition">
+            <button
+              onClick={() => setShowModal(true)}
+              className="px-4 py-2 bg-green-600 text-white rounded-full hover:bg-green-700 transition flex items-center gap-2 justify-center mx-auto"
+            >
+              <FaEdit />
               Edit Profil
             </button>
           </div>
         </div>
       ) : (
         <p className="text-center text-red-500">Gagal memuat data pengguna.</p>
+      )}
+      {showModal && (
+        <EditProfile
+          data={userData}
+          onClose={() => setShowModal(false)}
+          onSaved={() => {
+            loadProfile();
+            setShowModal(false);
+          }}
+        />
       )}
     </div>
   );
